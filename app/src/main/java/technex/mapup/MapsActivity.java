@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -58,55 +61,161 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+/*      Horizontal Limits
+
+
+        //lets limit the region.........................................................................
+
+        LatLng one = new LatLng(21.565823, 69.758580);
+        LatLng two = new LatLng(24.787048, 94.389926);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+        //add them to builder
+        builder.include(one);
+        builder.include(two);
+
+
+        LatLngBounds bounds = builder.build();
+
+        //get width and height to current display screen
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+
+        // 20% padding
+        int padding = (int) (width * 0.20);
+
+        //set latlong bounds
+        mMap.setLatLngBoundsForCameraTarget(bounds);
+
+        //move camera to fill the bound to screen
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding));
+
+        //set zoom to level to current so that you won't be able to zoom out viz. move outside bounds
+        mMap.setMinZoomPreference(mMap.getCameraPosition().zoom);
+
+
+
+
+
+
+
+
+
+        //.............................................................................................
+
+
+        */
+
+
+
+
+//Lets try vertical limitations............................................................................
+        //.................................................................................................
+
+
+        mMap.setMinZoomPreference(4.6f);
+        mMap.setMaxZoomPreference(14.0f);
+
+
+        LatLng one = new LatLng(22.364054, 69.456477);
+        LatLng two = new LatLng(25.332917, 94.890349);
+
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+        //add them to builder
+        builder.include(one);
+        builder.include(two);
+
+
+        LatLngBounds bounds = builder.build();
+
+        //get width and height to current display screen
+        int width = getResources().getDisplayMetrics().widthPixels;
+        int height = getResources().getDisplayMetrics().heightPixels;
+
+        // 20% padding
+        int padding = (int) (width * 0.2);
+
+        //set latlong bounds
+        mMap.setLatLngBoundsForCameraTarget(bounds);
+
+        //move camera to fill the bound to screen
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding));
+
+        //set zoom to level to current so that you won't be able to zoom out viz. move outside bounds
+        mMap.setMinZoomPreference(mMap.getCameraPosition().zoom);
+
+        //.......................................................................................
+        //.......................................................................................
+
+
+
+
+
+
+
+
+/*
+// Create a LatLngBounds that includes the city of Adelaide in Australia.
+        LatLngBounds INDIA = new LatLngBounds(
+                new LatLng(34.043843, 76.031773), new LatLng(11.551208, 78.877102));
+// Constrain the camera target to the Adelaide bounds.
+        mMap.setLatLngBoundsForCameraTarget(INDIA);
+*/
+
+
+
+
 
         // Add some markers to the map, and add a data object to each marker.
         mCENTER_MP = mMap.addMarker(new MarkerOptions()
                 .position(CENTER_MP)
-                .title("MORPHOSIS"));
+                .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
         mCENTER_MP.setTag(0);
 
         mWEST_BENG = mMap.addMarker(new MarkerOptions()
                 .position(WEST_BENG)
-                .title("SCHEDULES"));
+                .title("SCHEDULES") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_schedules)));
         mWEST_BENG.setTag(0);
 
         mAHMEDABAD = mMap.addMarker(new MarkerOptions()
                 .position(AHMEDABAD)
-                .title("GAMES"));
+                .title("NEWS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_news)));
         mAHMEDABAD.setTag(0);
 
 
         mHIMACHAL_TOP = mMap.addMarker(new MarkerOptions()
                 .position(HIMACHAL_TOP)
-                .title("WORKSHOPS"));
+                .title("PEOPLE") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_people)));
         mHIMACHAL_TOP.setTag(0);
 
         mHYDER_SOUTH = mMap.addMarker(new MarkerOptions()
                 .position(HYDER_SOUTH)
-                .title("PRIZES"));
+                .title("PRIZES") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_prize)));
         mHYDER_SOUTH.setTag(0);
 
         mMIZORAM_EAST = mMap.addMarker(new MarkerOptions()
                 .position(MIZORAM_EAST)
-                .title("WEB"));
+                .title("WEB") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_web)));
         mMIZORAM_EAST.setTag(0);
 
 
         mMUMBAI = mMap.addMarker(new MarkerOptions()
                 .position(MUMBAI)
-                .title("ABOUT"));
+                .title("ABOUT") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_about)));
         mMUMBAI.setTag(0);
 
 
         mNAG_RAJASTHAN = mMap.addMarker(new MarkerOptions()
                 .position(NAG_RAJASTHAN)
-                .title("WINNERS"));
+                .title("WINNERS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_winners)));
         mNAG_RAJASTHAN.setTag(0);
 
 
         mBIHAR = mMap.addMarker(new MarkerOptions()
                 .position(BIHAR)
-                .title("DEVELOPERS"));
+                .title("DEVELOPERS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_dev)));
         mBIHAR.setTag(0);
 
         // Set a listener for marker click.
