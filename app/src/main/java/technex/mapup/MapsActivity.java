@@ -24,15 +24,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private static final String TAG = MapsActivity.class.getSimpleName();
-    private static final LatLng CENTER_MP = new LatLng(23.525258, 79.507292);
-    private static final LatLng WEST_BENG = new LatLng(23.000416, 86.055143);
-    private static final LatLng AHMEDABAD = new LatLng(23.015353, 72.562736);
-    private static final LatLng HIMACHAL_TOP = new LatLng(31.972245, 76.134489);
-    private static final LatLng HYDER_SOUTH = new LatLng(16.974366, 76.903532);
-    private static final LatLng MIZORAM_EAST = new LatLng(22.757487, 92.504117);
-    private static final LatLng MUMBAI = new LatLng(19.078304, 72.883920);
-    private static final LatLng NAG_RAJASTHAN = new LatLng(26.933380, 73.212126);
-    private static final LatLng BIHAR = new LatLng(25.870638, 86.395719);
+  //  private static final LatLng CENTER_MP = new LatLng(23.786683, 92.562416);
+    private static final LatLng WEST_BENG = new LatLng(23.911651, 92.465923);
+    private static final LatLng AHMEDABAD = new LatLng(23.909160, 92.480471);
+    private static final LatLng HIMACHAL_TOP = new LatLng(23.911376, 92.488990);
+    private static final LatLng HYDER_SOUTH = new LatLng(23.907983, 92.494375);
+    private static final LatLng MIZORAM_EAST = new LatLng(23.897370, 92.495105);
+    private static final LatLng MUMBAI = new LatLng(23.882184, 92.498817);
+    private static final LatLng NAG_RAJASTHAN = new LatLng(23.859953, 92.496950);
+    private static final LatLng BIHAR = new LatLng(23.854825, 92.491530);
+
+
+
+
+    private static final LatLng START_RES= new LatLng(23.909886, 92.438178);
+
+
+
+
+
+
 
     private Marker mCENTER_MP;
     private Marker mWEST_BENG;
@@ -43,6 +54,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker mMUMBAI;
     private Marker mNAG_RAJASTHAN;
     private Marker mBIHAR;
+
+
+
+    private Marker mSTART_RES;
 
     private GoogleMap mMap;
 
@@ -114,12 +129,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //.................................................................................................
 
 
-        mMap.setMinZoomPreference(4.6f);
-        mMap.setMaxZoomPreference(14.0f);
+     // mMap.setMinZoomPreference(4.6f);
+       // mMap.setMaxZoomPreference(14.0f);
 
 
-        LatLng one = new LatLng(22.364054, 69.456477);
-        LatLng two = new LatLng(25.332917, 94.890349);
+       //LatLng one = new LatLng(22.364054, 69.456477);
+        //LatLng two = new LatLng(25.332917, 94.890349);
+
+
+
+        //Setting bounds outside mizoram
+
+       /* !-----------------------------------------------------------------------------------------
+
+        LatLng one = new LatLng(23.942509, 92.211017);
+        LatLng two = new LatLng(23.676149, 94.4027894);
+
+
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
@@ -149,7 +175,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //.......................................................................................
         //.......................................................................................
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
+       //UNDER ANY PROBLEM UNCOMMENT THE ABOVE CODE
 
 
 
@@ -169,54 +197,79 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         // Add some markers to the map, and add a data object to each marker.
-        mCENTER_MP = mMap.addMarker(new MarkerOptions()
-                .position(CENTER_MP)
-                .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
-        mCENTER_MP.setTag(0);
+   //     mCENTER_MP = mMap.addMarker(new MarkerOptions()
+     //           .position(CENTER_MP)
+       //         .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+        //mCENTER_MP.setTag(0);
 
         mWEST_BENG = mMap.addMarker(new MarkerOptions()
                 .position(WEST_BENG)
                 .title("SCHEDULES") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_schedules)));
-        mWEST_BENG.setTag(0);
+        mWEST_BENG.setTag(1);
 
         mAHMEDABAD = mMap.addMarker(new MarkerOptions()
                 .position(AHMEDABAD)
                 .title("NEWS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_news)));
-        mAHMEDABAD.setTag(0);
+        mAHMEDABAD.setTag(2);
 
 
         mHIMACHAL_TOP = mMap.addMarker(new MarkerOptions()
                 .position(HIMACHAL_TOP)
                 .title("PEOPLE") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_people)));
-        mHIMACHAL_TOP.setTag(0);
+        mHIMACHAL_TOP.setTag(3);
 
         mHYDER_SOUTH = mMap.addMarker(new MarkerOptions()
                 .position(HYDER_SOUTH)
                 .title("PRIZES") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_prize)));
-        mHYDER_SOUTH.setTag(0);
+        mHYDER_SOUTH.setTag(4);
 
         mMIZORAM_EAST = mMap.addMarker(new MarkerOptions()
                 .position(MIZORAM_EAST)
                 .title("WEB") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_web)));
-        mMIZORAM_EAST.setTag(0);
+        mMIZORAM_EAST.setTag(5);
 
 
         mMUMBAI = mMap.addMarker(new MarkerOptions()
                 .position(MUMBAI)
                 .title("ABOUT") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_about)));
-        mMUMBAI.setTag(0);
+        mMUMBAI.setTag(6);
 
 
         mNAG_RAJASTHAN = mMap.addMarker(new MarkerOptions()
                 .position(NAG_RAJASTHAN)
                 .title("WINNERS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_winners)));
-        mNAG_RAJASTHAN.setTag(0);
+        mNAG_RAJASTHAN.setTag(7);
 
 
         mBIHAR = mMap.addMarker(new MarkerOptions()
                 .position(BIHAR)
                 .title("DEVELOPERS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_dev)));
-        mBIHAR.setTag(0);
+        mBIHAR.setTag(8);
+
+
+
+        mSTART_RES = mMap.addMarker(new MarkerOptions()
+                .position(START_RES)
+                .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+        mSTART_RES.setTag(0);
+
+
+
+     //   mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CENTER_MP,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WEST_BENG,18));
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(AHMEDABAD,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HIMACHAL_TOP,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HYDER_SOUTH,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MIZORAM_EAST,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MUMBAI,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NAG_RAJASTHAN,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BIHAR,18));
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_RES,18));
+
 
         // Set a listener for marker click.
         mMap.setOnMarkerClickListener(this);
@@ -225,12 +278,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //JSON STYLED MAP
 
-        try {
+       try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.vip));
+                            this, R.raw.locmap));
 
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
@@ -239,6 +292,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.e(TAG, "Can't find style. Error: ", e);
         }
 
+      /*!!!!!!!!!!!!!!!!!!!!!!!!!IN CASE PROBLEM !UNCOMMENT ABOVE JSON*/
 
 
 
