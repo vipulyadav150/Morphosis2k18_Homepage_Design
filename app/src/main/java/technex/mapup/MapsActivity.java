@@ -2,6 +2,8 @@ package technex.mapup;
 
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -43,7 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
+    int height = 400;
+    int width = 250;
 
     private Marker mCENTER_MP;
     private Marker mWEST_BENG;
@@ -75,6 +78,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        BitmapDrawable bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.mark1);
+        Bitmap b=bitmapDraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b,width,height,false);
 
 /*      Horizontal Limits
 
@@ -204,53 +210,53 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mWEST_BENG = mMap.addMarker(new MarkerOptions()
                 .position(WEST_BENG)
-                .title("SCHEDULES") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_schedules)));
+                .title("SCHEDULES") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mWEST_BENG.setTag(1);
 
         mAHMEDABAD = mMap.addMarker(new MarkerOptions()
                 .position(AHMEDABAD)
-                .title("NEWS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_news)));
+                .title("NEWS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mAHMEDABAD.setTag(2);
 
 
         mHIMACHAL_TOP = mMap.addMarker(new MarkerOptions()
                 .position(HIMACHAL_TOP)
-                .title("PEOPLE") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_people)));
+                .title("PEOPLE") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mHIMACHAL_TOP.setTag(3);
 
         mHYDER_SOUTH = mMap.addMarker(new MarkerOptions()
                 .position(HYDER_SOUTH)
-                .title("PRIZES") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_prize)));
+                .title("PRIZES") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mHYDER_SOUTH.setTag(4);
 
         mMIZORAM_EAST = mMap.addMarker(new MarkerOptions()
                 .position(MIZORAM_EAST)
-                .title("WEB") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_web)));
+                .title("WEB") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mMIZORAM_EAST.setTag(5);
 
 
         mMUMBAI = mMap.addMarker(new MarkerOptions()
                 .position(MUMBAI)
-                .title("ABOUT") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_about)));
+                .title("ABOUT") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mMUMBAI.setTag(6);
 
 
         mNAG_RAJASTHAN = mMap.addMarker(new MarkerOptions()
                 .position(NAG_RAJASTHAN)
-                .title("WINNERS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_winners)));
+                .title("WINNERS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mNAG_RAJASTHAN.setTag(7);
 
 
         mBIHAR = mMap.addMarker(new MarkerOptions()
                 .position(BIHAR)
-                .title("DEVELOPERS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_dev)));
+                .title("DEVELOPERS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mBIHAR.setTag(8);
 
 
 
         mSTART_RES = mMap.addMarker(new MarkerOptions()
                 .position(START_RES)
-                .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+                .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mSTART_RES.setTag(0);
 
 
