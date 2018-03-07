@@ -3,6 +3,7 @@ package technex.mapup;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -19,7 +20,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+import com.google.android.gms.maps.model.PolylineOptions;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
@@ -27,19 +28,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static final String TAG = MapsActivity.class.getSimpleName();
   //  private static final LatLng CENTER_MP = new LatLng(23.786683, 92.562416);
-    private static final LatLng WEST_BENG = new LatLng(23.911651, 92.465923);
-    private static final LatLng AHMEDABAD = new LatLng(23.909160, 92.480471);
-    private static final LatLng HIMACHAL_TOP = new LatLng(23.911376, 92.488990);
-    private static final LatLng HYDER_SOUTH = new LatLng(23.907983, 92.494375);
-    private static final LatLng MIZORAM_EAST = new LatLng(23.897370, 92.495105);
-    private static final LatLng MUMBAI = new LatLng(23.882184, 92.498817);
-    private static final LatLng NAG_RAJASTHAN = new LatLng(23.859953, 92.496950);
-    private static final LatLng BIHAR = new LatLng(23.854825, 92.491530);
+    private static final LatLng WEST_BENG = new LatLng(23.736066, 92.851071);
+    private static final LatLng AHMEDABAD = new LatLng(23.657583, 92.926093);
+    private static final LatLng HIMACHAL_TOP = new LatLng(23.652445, 93.067848);
+    private static final LatLng HYDER_SOUTH = new LatLng(23.560831, 93.121916);
+    private static final LatLng MIZORAM_EAST = new LatLng(23.778749, 93.109395);
+    private static final LatLng MUMBAI = new LatLng(23.615411, 93.192173);
+    private static final LatLng NAG_RAJASTHAN = new LatLng(23.585055, 93.206185);
+    private static final LatLng BIHAR = new LatLng(23.452466, 93.201147);
 
 
 
 
-    private static final LatLng START_RES= new LatLng(23.909886, 92.438178);
+    private static final LatLng START_RES= new LatLng(23.754643, 92.681841);
 
 
 
@@ -260,21 +261,187 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mSTART_RES.setTag(0);
 
 
-
-     //   mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CENTER_MP,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WEST_BENG,18));
+//Adding polylines btw given coordinates
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(AHMEDABAD,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HIMACHAL_TOP,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HYDER_SOUTH,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MIZORAM_EAST,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MUMBAI,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NAG_RAJASTHAN,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BIHAR,18));
+        mMap.addPolyline(new PolylineOptions().add(
+
+                    START_RES,
+                    new LatLng(23.740036, 92.749590),
+                    new LatLng(23.734693, 92.805895),
+
+                    WEST_BENG
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_RES,18));
+                )
+                .width(10)
+                .color(Color.RED)
+
+
+        );
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                WEST_BENG,
+                new LatLng(23.697987, 92.877133),
+                new LatLng(23.663716, 92.896188),
+
+                AHMEDABAD
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                AHMEDABAD,
+                new LatLng(23.668168, 92.990601),
+                new LatLng(23.632945, 93.032143),
+
+                HIMACHAL_TOP
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                HIMACHAL_TOP,
+                new LatLng(23.620597, 93.080603),
+                new LatLng(23.582845, 93.097426),
+                HYDER_SOUTH
+
+
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+
+
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                HYDER_SOUTH,
+                new LatLng(23.717036, 93.099380),
+                new LatLng(23.612415, 93.082894),
+                MIZORAM_EAST
+
+
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                MIZORAM_EAST,
+                new LatLng(23.736792, 93.176540),
+                new LatLng(23.677694, 93.205380),
+                MUMBAI
+
+
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                MUMBAI,
+                new LatLng(23.762233, 93.155579),
+                new LatLng(23.680511, 93.205018),
+                NAG_RAJASTHAN
+
+
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+
+
+        mMap.addPolyline(new PolylineOptions().add(
+
+                NAG_RAJASTHAN,
+                new LatLng(23.523414, 93.185397),
+                new LatLng(23.472723, 93.202219),
+                BIHAR
+
+
+
+
+                )
+                        .width(10)
+                        .color(Color.RED)
+
+
+        );
+
+
+
+
+
+
+
+
+
+
+        //   mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CENTER_MP,18));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WEST_BENG,12));
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(AHMEDABAD,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HIMACHAL_TOP,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HYDER_SOUTH,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MIZORAM_EAST,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MUMBAI,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NAG_RAJASTHAN,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BIHAR,12));
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_RES,12));
 
 
         // Set a listener for marker click.
@@ -289,7 +456,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.locmap));
+                            this, R.raw.standard));
 
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
