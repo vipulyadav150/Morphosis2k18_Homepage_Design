@@ -1,6 +1,9 @@
 package technex.mapup;
 
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -8,19 +11,25 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.util.Property;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import static android.view.FrameMetrics.ANIMATION_DURATION;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
@@ -32,10 +41,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng AHMEDABAD = new LatLng(23.657583, 92.926093);
     private static final LatLng HIMACHAL_TOP = new LatLng(23.652445, 93.067848);
     private static final LatLng HYDER_SOUTH = new LatLng(23.560831, 93.121916);
-    private static final LatLng MIZORAM_EAST = new LatLng(23.778749, 93.109395);
-    private static final LatLng MUMBAI = new LatLng(23.615411, 93.192173);
-    private static final LatLng NAG_RAJASTHAN = new LatLng(23.585055, 93.206185);
-    private static final LatLng BIHAR = new LatLng(23.452466, 93.201147);
+    private static final LatLng MIZORAM_EAST = new LatLng(23.520805, 93.368913);
+    private static final LatLng MUMBAI = new LatLng(23.230712, 93.262844);
+    private static final LatLng NAG_RAJASTHAN = new LatLng(23.140105, 93.169717);
+    private static final LatLng BIHAR = new LatLng(23.000465, 93.083411);
 
 
 
@@ -46,8 +55,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    int height = 400;
-    int width = 250;
+
+
+
+    int height = 470;
+    int width = 420;
 
     private Marker mCENTER_MP;
     private Marker mWEST_BENG;
@@ -76,12 +88,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        BitmapDrawable bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.mark1);
+
+
+      //  bitmapmarker = BitmapDescriptorFactory.fromResource(R.drawable.aboutpin);
+
+        BitmapDrawable bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.schedulepin);
         Bitmap b=bitmapDraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b,width,height,false);
+
+
+        BitmapDrawable bitmapDrawnews =(BitmapDrawable)getResources().getDrawable(R.drawable.newspin);
+        Bitmap bnews=bitmapDrawnews.getBitmap();
+        Bitmap smallMarkernews = Bitmap.createScaledBitmap(bnews,width,height,false);
+
+
+        BitmapDrawable bitmapDrawpeople=(BitmapDrawable)getResources().getDrawable(R.drawable.peoplepin);
+        Bitmap bpeople=bitmapDrawpeople.getBitmap();
+        Bitmap smallMarkerpeople = Bitmap.createScaledBitmap(bpeople,width,height,false);
+
+
+        BitmapDrawable bitmapDrawprizes=(BitmapDrawable)getResources().getDrawable(R.drawable.prizepin);
+        Bitmap bprizes=bitmapDrawprizes.getBitmap();
+        Bitmap smallMarkerprizes = Bitmap.createScaledBitmap(bprizes,width,height,false);
+
+
+
+        BitmapDrawable bitmapDrawweb=(BitmapDrawable)getResources().getDrawable(R.drawable.webpin);
+        Bitmap bweb=bitmapDrawweb.getBitmap();
+        Bitmap smallMarkerweb = Bitmap.createScaledBitmap(bweb,width,height,false);
+
+
+
+
+
+        BitmapDrawable bitmapDrawabout=(BitmapDrawable)getResources().getDrawable(R.drawable.aboutpin);
+        Bitmap babout=bitmapDrawabout.getBitmap();
+        Bitmap smallMarkerabout = Bitmap.createScaledBitmap(babout,width,height,false);
+
+
+
+        BitmapDrawable bitmapDrawwinner=(BitmapDrawable)getResources().getDrawable(R.drawable.winnerpin);
+        Bitmap bwinner=bitmapDrawwinner.getBitmap();
+        Bitmap smallMarkerwinner = Bitmap.createScaledBitmap(bwinner,width,height,false);
+
+
+
+        BitmapDrawable bitmapDrawdev=(BitmapDrawable)getResources().getDrawable(R.drawable.devpin);
+        Bitmap bdev=bitmapDrawdev.getBitmap();
+        Bitmap smallMarkerdev= Bitmap.createScaledBitmap(bdev,width,height,false);
+
+
+
 
 /*      Horizontal Limits
 
@@ -211,46 +272,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mWEST_BENG = mMap.addMarker(new MarkerOptions()
                 .position(WEST_BENG)
-                .title("SCHEDULES") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("SCHEDULES").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         mWEST_BENG.setTag(1);
 
         mAHMEDABAD = mMap.addMarker(new MarkerOptions()
                 .position(AHMEDABAD)
-                .title("NEWS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("NEWS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkernews)));
         mAHMEDABAD.setTag(2);
 
 
         mHIMACHAL_TOP = mMap.addMarker(new MarkerOptions()
                 .position(HIMACHAL_TOP)
-                .title("PEOPLE") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("PEOPLE") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkerpeople)));
         mHIMACHAL_TOP.setTag(3);
 
         mHYDER_SOUTH = mMap.addMarker(new MarkerOptions()
                 .position(HYDER_SOUTH)
-                .title("PRIZES") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("PRIZES") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkerprizes)));
         mHYDER_SOUTH.setTag(4);
 
         mMIZORAM_EAST = mMap.addMarker(new MarkerOptions()
                 .position(MIZORAM_EAST)
-                .title("WEB") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("WEB") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkerweb)));
         mMIZORAM_EAST.setTag(5);
 
 
         mMUMBAI = mMap.addMarker(new MarkerOptions()
                 .position(MUMBAI)
-                .title("ABOUT") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("ABOUT") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkerabout)));
         mMUMBAI.setTag(6);
 
 
         mNAG_RAJASTHAN = mMap.addMarker(new MarkerOptions()
                 .position(NAG_RAJASTHAN)
-                .title("WINNERS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("WINNERS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkerwinner)));
         mNAG_RAJASTHAN.setTag(7);
 
 
         mBIHAR = mMap.addMarker(new MarkerOptions()
                 .position(BIHAR)
-                .title("DEVELOPERS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .title("DEVELOPERS") .icon(BitmapDescriptorFactory.fromBitmap(smallMarkerdev)));
         mBIHAR.setTag(8);
 
 
@@ -264,6 +325,68 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //Adding polylines btw given coordinates
 
 
+
+        Circle circle = mMap.addCircle(new CircleOptions()
+                .center(START_RES)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+
+        Circle circlewest = mMap.addCircle(new CircleOptions()
+                .center(WEST_BENG)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+        Circle circleahm = mMap.addCircle(new CircleOptions()
+                .center(AHMEDABAD)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+        Circle circlehim = mMap.addCircle(new CircleOptions()
+                .center(HIMACHAL_TOP)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+        Circle circlehyd = mMap.addCircle(new CircleOptions()
+                .center(HYDER_SOUTH)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+        Circle circlemz = mMap.addCircle(new CircleOptions()
+                .center(MIZORAM_EAST)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+        Circle circlemum = mMap.addCircle(new CircleOptions()
+                .center(MUMBAI)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+
+        Circle circleraj = mMap.addCircle(new CircleOptions()
+                .center(NAG_RAJASTHAN)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+
+        Circle circlebihar = mMap.addCircle(new CircleOptions()
+                .center(BIHAR)
+                .radius(1000)
+                .strokeColor(R.color.colorLoc)
+                .fillColor(R.color.colorLocedge)
+        );
+
+
+
+
         mMap.addPolyline(new PolylineOptions().add(
 
                     START_RES,
@@ -274,8 +397,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                 )
-                .width(10)
-                .color(Color.RED)
+                .width(30)
+                .color(Color.BLACK)
 
 
         );
@@ -291,8 +414,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
@@ -309,8 +432,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
@@ -323,16 +446,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 HIMACHAL_TOP,
-                new LatLng(23.620597, 93.080603),
-                new LatLng(23.582845, 93.097426),
+                new LatLng(23.608655, 93.092450),
+                new LatLng(23.608655, 93.092450),
                 HYDER_SOUTH
 
 
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
@@ -346,16 +469,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 HYDER_SOUTH,
-                new LatLng(23.717036, 93.099380),
-                new LatLng(23.612415, 93.082894),
+                new LatLng(23.553855, 93.209611),
+                new LatLng(23.540321, 93.310205),
                 MIZORAM_EAST
 
 
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
@@ -365,16 +488,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 MIZORAM_EAST,
-                new LatLng(23.736792, 93.176540),
-                new LatLng(23.677694, 93.205380),
+                new LatLng(23.388013, 93.333748),
+                new LatLng(23.292814, 93.305596),
                 MUMBAI
 
 
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
@@ -384,16 +507,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 MUMBAI,
-                new LatLng(23.762233, 93.155579),
-                new LatLng(23.680511, 93.205018),
+                new LatLng(23.182717, 93.239786),
+                new LatLng(23.147365, 93.181078),
                 NAG_RAJASTHAN
 
 
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
@@ -405,16 +528,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 NAG_RAJASTHAN,
-                new LatLng(23.523414, 93.185397),
-                new LatLng(23.472723, 93.202219),
+                new LatLng(23.058983, 93.083026),
+                new LatLng(23.030614, 93.039865),
                 BIHAR
 
 
 
 
                 )
-                        .width(10)
-                        .color(Color.RED)
+                        .width(30)
+                        .color(Color.BLACK)
 
 
         );
