@@ -37,19 +37,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private static final String TAG = MapsActivity.class.getSimpleName();
   //  private static final LatLng CENTER_MP = new LatLng(23.786683, 92.562416);
-    private static final LatLng WEST_BENG = new LatLng(23.736066, 92.851071);
-    private static final LatLng AHMEDABAD = new LatLng(23.657583, 92.926093);
-    private static final LatLng HIMACHAL_TOP = new LatLng(23.652445, 93.067848);
-    private static final LatLng HYDER_SOUTH = new LatLng(23.560831, 93.121916);
-    private static final LatLng MIZORAM_EAST = new LatLng(23.520805, 93.368913);
-    private static final LatLng MUMBAI = new LatLng(23.230712, 93.262844);
-    private static final LatLng NAG_RAJASTHAN = new LatLng(23.140105, 93.169717);
-    private static final LatLng BIHAR = new LatLng(23.000465, 93.083411);
+    private static final LatLng WEST_BENG = new LatLng(19.831878, 75.903721);
+    private static final LatLng AHMEDABAD = new LatLng(20.133228, 75.822871);
+    private static final LatLng HIMACHAL_TOP = new LatLng(20.543667, 75.747941);//
+    private static final LatLng HYDER_SOUTH = new LatLng(20.656386, 75.695408);
+    private static final LatLng MIZORAM_EAST = new LatLng(20.977515, 75.645371);
+    private static final LatLng MUMBAI = new LatLng(21.219211, 75.652879);
+    private static final LatLng NAG_RAJASTHAN = new LatLng(21.601164, 75.884302);
+    private static final LatLng BIHAR = new LatLng(21.874551, 75.941858);
 
 
 
 
-    private static final LatLng START_RES= new LatLng(23.754643, 92.681841);
+    private static final LatLng START_RES= new LatLng(19.537065, 75.769825);
 
 
 
@@ -390,8 +390,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                     START_RES,
-                    new LatLng(23.740036, 92.749590),
-                    new LatLng(23.734693, 92.805895),
+                    new LatLng(19.679041, 75.820701),
+                    new LatLng(19.789562, 75.857780),
 
                     WEST_BENG
 
@@ -407,8 +407,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 WEST_BENG,
-                new LatLng(23.697987, 92.877133),
-                new LatLng(23.663716, 92.896188),
+                new LatLng(19.984436, 75.874192),
+                new LatLng(20.085070, 75.836427),
 
                 AHMEDABAD
 
@@ -425,8 +425,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 AHMEDABAD,
-                new LatLng(23.668168, 92.990601),
-                new LatLng(23.632945, 93.032143),
+                new LatLng(20.366147, 75.728715),
+                new LatLng(20.497410, 75.738328),
 
                 HIMACHAL_TOP
 
@@ -446,8 +446,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 HIMACHAL_TOP,
-                new LatLng(23.608655, 93.092450),
-                new LatLng(23.608655, 93.092450),
+                new LatLng(20.596020, 75.722239),
+                new LatLng(20.635223, 75.711596),
                 HYDER_SOUTH
 
 
@@ -469,8 +469,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 HYDER_SOUTH,
-                new LatLng(23.553855, 93.209611),
-                new LatLng(23.540321, 93.310205),
+                new LatLng(20.795756, 75.659197),
+                new LatLng(20.911256, 75.645464),
                 MIZORAM_EAST
 
 
@@ -488,8 +488,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 MIZORAM_EAST,
-                new LatLng(23.388013, 93.333748),
-                new LatLng(23.292814, 93.305596),
+                new LatLng(21.117427, 75.665925),
+                new LatLng(21.200032, 75.661119),
                 MUMBAI
 
 
@@ -507,8 +507,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 MUMBAI,
-                new LatLng(23.182717, 93.239786),
-                new LatLng(23.147365, 93.181078),
+                new LatLng(21.430594, 75.764574),
+                new LatLng(21.569867, 75.868944),
                 NAG_RAJASTHAN
 
 
@@ -528,8 +528,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addPolyline(new PolylineOptions().add(
 
                 NAG_RAJASTHAN,
-                new LatLng(23.058983, 93.083026),
-                new LatLng(23.030614, 93.039865),
+                new LatLng(21.736154, 75.910028),
+                new LatLng(21.856014, 75.929941),
                 BIHAR
 
 
@@ -579,7 +579,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.standard));
+                            this, R.raw.darkblue));
 
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
