@@ -20,16 +20,27 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.TileOverlay;
+import com.google.android.gms.maps.model.TileOverlayOptions;
+import com.google.android.gms.maps.model.TileProvider;
+import com.google.android.gms.maps.model.UrlTileProvider;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static android.view.FrameMetrics.ANIMATION_DURATION;
+import static technex.mapup.R.id.map;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
@@ -46,17 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng NAG_RAJASTHAN = new LatLng(21.601164, 75.884302);
     private static final LatLng BIHAR = new LatLng(21.874551, 75.941858);
 
-
-
-
     private static final LatLng START_RES= new LatLng(19.537065, 75.769825);
-
-
-
-
-
-
-
 
     int height = 470;
     int width = 420;
@@ -71,11 +72,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker mNAG_RAJASTHAN;
     private Marker mBIHAR;
 
-
-
     private Marker mSTART_RES;
 
     private GoogleMap mMap;
+    float mCameraTilt = (float)67.5;
+
+    int camzoom = 21;
+    int cambear = 10;
+    double x = 19.537065;
+    double y = 75.769825;
+
 
 
     @Override
@@ -83,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(map);
         mapFragment.getMapAsync(this);
     }
 
@@ -92,9 +98,105 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setBuildingsEnabled(true);
+        mMap.setIndoorEnabled(true);
 
 
-      //  bitmapmarker = BitmapDescriptorFactory.fromResource(R.drawable.aboutpin);
+
+        GroundOverlayOptions newarkMap = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(START_RES, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMap);
+
+        GroundOverlayOptions newarkMapa = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(WEST_BENG, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMapa);
+
+        GroundOverlayOptions newarkMapb = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(AHMEDABAD, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMapb);
+
+        GroundOverlayOptions newarkMapc = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(HIMACHAL_TOP, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMapc);
+
+        GroundOverlayOptions newarkMapd = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(HYDER_SOUTH, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMapd);
+
+        GroundOverlayOptions newarkMape = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(MIZORAM_EAST, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMape);
+
+        GroundOverlayOptions newarkMapf = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(MUMBAI, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMapf);
+
+        GroundOverlayOptions newarkMapg = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(NAG_RAJASTHAN, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMapg);
+
+        GroundOverlayOptions newarkMaph = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.savageicon))
+                .position(BIHAR, 8600f, 6500f);
+        mMap.addGroundOverlay(newarkMaph);
+
+
+      /*  TileProvider tileProvider = new UrlTileProvider(256, 256) {
+            @Override
+            public URL getTileUrl(int x, int y, int zoom) {
+
+    /* Define the URL pattern for the tile images */
+         /*       String s = String.format("https://maps.googleapis.com/maps/api/staticmap?sensor=false&size=640x640&visual_refresh=true&scale=2&center=28.208608,65.643776&zoom=3&maptype=satellite", zoom, x, y);
+
+                if (!checkTileExists(x, y, zoom)) {
+                    return null;
+                }
+
+                try {
+                    return new URL(s);
+                } catch (MalformedURLException e) {
+                    throw new AssertionError(e);
+                }
+            }
+
+
+             * Check that the tile server supports the requested x, y and zoom.
+             * Complete this stub according to the tile range you support.
+             * If you support a limited range of tiles at different zoom levels, then you
+             * need to define the supported x, y range at each zoom level.
+
+            private boolean checkTileExists(int x, int y, int zoom) {
+                int minZoom = 10;
+                int maxZoom = 21;
+
+                if ((zoom < minZoom || zoom > maxZoom)) {
+                    return false;
+                }
+
+                return true;
+            }
+        };
+
+        TileOverlay tileOverlay = mMap.addTileOverlay(new TileOverlayOptions()
+                .tileProvider(tileProvider));
+
+
+        */
+
+
+
+
+        // CameraPosition cameraPosition = new CameraPosition.Builder().zoom(10).tilt(45).build();
+       // mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
 
         BitmapDrawable bitmapDraw=(BitmapDrawable)getResources().getDrawable(R.drawable.schedulepin);
         Bitmap b=bitmapDraw.getBitmap();
@@ -110,32 +212,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bitmap bpeople=bitmapDrawpeople.getBitmap();
         Bitmap smallMarkerpeople = Bitmap.createScaledBitmap(bpeople,width,height,false);
 
-
         BitmapDrawable bitmapDrawprizes=(BitmapDrawable)getResources().getDrawable(R.drawable.prizepin);
         Bitmap bprizes=bitmapDrawprizes.getBitmap();
         Bitmap smallMarkerprizes = Bitmap.createScaledBitmap(bprizes,width,height,false);
-
-
 
         BitmapDrawable bitmapDrawweb=(BitmapDrawable)getResources().getDrawable(R.drawable.webpin);
         Bitmap bweb=bitmapDrawweb.getBitmap();
         Bitmap smallMarkerweb = Bitmap.createScaledBitmap(bweb,width,height,false);
 
-
-
-
-
         BitmapDrawable bitmapDrawabout=(BitmapDrawable)getResources().getDrawable(R.drawable.aboutpin);
         Bitmap babout=bitmapDrawabout.getBitmap();
         Bitmap smallMarkerabout = Bitmap.createScaledBitmap(babout,width,height,false);
 
-
-
         BitmapDrawable bitmapDrawwinner=(BitmapDrawable)getResources().getDrawable(R.drawable.winnerpin);
         Bitmap bwinner=bitmapDrawwinner.getBitmap();
         Bitmap smallMarkerwinner = Bitmap.createScaledBitmap(bwinner,width,height,false);
-
-
 
         BitmapDrawable bitmapDrawdev=(BitmapDrawable)getResources().getDrawable(R.drawable.devpin);
         Bitmap bdev=bitmapDrawdev.getBitmap();
@@ -144,131 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-/*      Horizontal Limits
 
-
-        //lets limit the region.........................................................................
-
-        LatLng one = new LatLng(21.565823, 69.758580);
-        LatLng two = new LatLng(24.787048, 94.389926);
-
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-
-        //add them to builder
-        builder.include(one);
-        builder.include(two);
-
-
-        LatLngBounds bounds = builder.build();
-
-        //get width and height to current display screen
-        int width = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels;
-
-        // 20% padding
-        int padding = (int) (width * 0.20);
-
-        //set latlong bounds
-        mMap.setLatLngBoundsForCameraTarget(bounds);
-
-        //move camera to fill the bound to screen
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding));
-
-        //set zoom to level to current so that you won't be able to zoom out viz. move outside bounds
-        mMap.setMinZoomPreference(mMap.getCameraPosition().zoom);
-
-
-
-
-
-
-
-
-
-        //.............................................................................................
-
-
-        */
-
-
-
-
-//Lets try vertical limitations............................................................................
-        //.................................................................................................
-
-
-     // mMap.setMinZoomPreference(4.6f);
-       // mMap.setMaxZoomPreference(14.0f);
-
-
-       //LatLng one = new LatLng(22.364054, 69.456477);
-        //LatLng two = new LatLng(25.332917, 94.890349);
-
-
-
-        //Setting bounds outside mizoram
-
-       /* !-----------------------------------------------------------------------------------------
-
-        LatLng one = new LatLng(23.942509, 92.211017);
-        LatLng two = new LatLng(23.676149, 94.4027894);
-
-
-
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-
-        //add them to builder
-        builder.include(one);
-        builder.include(two);
-
-
-        LatLngBounds bounds = builder.build();
-
-        //get width and height to current display screen
-        int width = getResources().getDisplayMetrics().widthPixels;
-        int height = getResources().getDisplayMetrics().heightPixels;
-
-        // 20% padding
-        int padding = (int) (width * 0.2);
-
-        //set latlong bounds
-        mMap.setLatLngBoundsForCameraTarget(bounds);
-
-        //move camera to fill the bound to screen
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding));
-
-        //set zoom to level to current so that you won't be able to zoom out viz. move outside bounds
-        mMap.setMinZoomPreference(mMap.getCameraPosition().zoom);
-
-        //.......................................................................................
-        //.......................................................................................
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-
-       //UNDER ANY PROBLEM UNCOMMENT THE ABOVE CODE
-
-
-
-
-
-
-/*
-// Create a LatLngBounds that includes the city of Adelaide in Australia.
-        LatLngBounds INDIA = new LatLngBounds(
-                new LatLng(34.043843, 76.031773), new LatLng(11.551208, 78.877102));
-// Constrain the camera target to the Adelaide bounds.
-        mMap.setLatLngBoundsForCameraTarget(INDIA);
-*/
-
-
-
-
-
-        // Add some markers to the map, and add a data object to each marker.
-   //     mCENTER_MP = mMap.addMarker(new MarkerOptions()
-     //           .position(CENTER_MP)
-       //         .title("MORPHOSIS") .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
-        //mCENTER_MP.setTag(0);
 
         mWEST_BENG = mMap.addMarker(new MarkerOptions()
                 .position(WEST_BENG)
@@ -542,29 +509,84 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         );
 
-
-
-
-
-
-
-
-
-
         //   mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CENTER_MP,18));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WEST_BENG,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(WEST_BENG,10));
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(AHMEDABAD,12));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HIMACHAL_TOP,12));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HYDER_SOUTH,12));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MIZORAM_EAST,12));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MUMBAI,12));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NAG_RAJASTHAN,12));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BIHAR,12));
+      /*  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(AHMEDABAD,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HIMACHAL_TOP,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(HYDER_SOUTH,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MIZORAM_EAST,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MUMBAI,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NAG_RAJASTHAN,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(BIHAR,10));
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_RES,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_RES,10));*/
+
+        CameraPosition positiona = new CameraPosition.Builder()
+                .target(AHMEDABAD)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positionb = new CameraPosition.Builder()
+                .target(HIMACHAL_TOP)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positionc = new CameraPosition.Builder()
+                .target(HYDER_SOUTH)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positiond = new CameraPosition.Builder()
+                .target(MIZORAM_EAST)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positione = new CameraPosition.Builder()
+                .target(MUMBAI)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positionf = new CameraPosition.Builder()
+                .target(NAG_RAJASTHAN)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positiong = new CameraPosition.Builder()
+                .target(BIHAR)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+        CameraPosition positionh = new CameraPosition.Builder()
+                .target(START_RES)
+                .zoom(camzoom)
+                .bearing(cambear)
+                .tilt(mCameraTilt)
+                .build();
+
+
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positiona));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positionb));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positionc));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positiond));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positione));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positionf));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positiong));
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(positionh));
+
+
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_RES,10));
 
 
         // Set a listener for marker click.
@@ -579,7 +601,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.darkblue));
+                            this, R.raw.trymap));
 
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
@@ -587,29 +609,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Resources.NotFoundException e) {
             Log.e(TAG, "Can't find style. Error: ", e);
         }
-
-      /*!!!!!!!!!!!!!!!!!!!!!!!!!IN CASE PROBLEM !UNCOMMENT ABOVE JSON*/
-
-
-
-
-
-
-
-
-
-    /*@Override
-    public void onPolygonClick(Polygon polygon) {
-
-    }*/
-
-
-
- /*   @Override
-    public void onPolylineClick(Polyline polyline) {
-
-    }*/
-
 
 
 
@@ -631,141 +630,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
              }
              return false;
     }
+
+
+
+
 }
 
-//This code is used to create a POLYGON SHAPED AREA SELECTION!
-
-/*public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnPolylineClickListener,
-        GoogleMap.OnPolygonClickListener {
-
-
-    private static final int COLOR_BLACK_ARGB = 0xff000000;
-    private static final int POLYLINE_STROKE_WIDTH_PX = 12;
-    private GoogleMap mMap;
-    private static final String TAG = MapsActivity.class.getSimpleName();
-
-
-
-
-
-}*/
-
-
-    //Methods
-
-
-
-   /* @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-    }
-
-    private void stylePolyline(Polyline polyline) {
-        String type = "";
-        // Get the data object stored with the polyline.
-        if (polyline.getTag() != null) {
-            type = polyline.getTag().toString();
-        }
-
-        switch (type) {
-            // If no type is given, allow the API to use the default.
-            case "A":
-                // Use a custom bitmap as the cap at the start of the line.
-                polyline.setStartCap(
-                        new CustomCap(
-                                BitmapDescriptorFactory.fromResource(R.drawable.ic_arrow_drop_down_black_24dp), 10));
-                break;
-            case "B":
-                // Use a round cap at the start of the line.
-                polyline.setStartCap(new RoundCap());
-                break;
-        }
-
-        polyline.setEndCap(new RoundCap());
-        polyline.setWidth(POLYLINE_STROKE_WIDTH_PX);
-        polyline.setColor(COLOR_BLACK_ARGB);
-        polyline.setJointType(JointType.ROUND);
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        // Add polylines and polygons to the map. This section shows just
-        // a single polyline. Read the rest of the tutorial to learn more.
-        Polyline polyline1 = googleMap.addPolyline(new PolylineOptions()
-                .clickable(true)
-                .add(
-                        new LatLng(-35.016, 143.321),
-                        new LatLng(-34.747, 145.592),
-                        new LatLng(-34.364, 147.891),
-                        new LatLng(-33.501, 150.217),
-                        new LatLng(-32.306, 149.248),
-                        new LatLng(-32.491, 147.309)));
-
-        // Position the map's camera near Alice Springs in the center of Australia,
-        // and set the zoom factor so most of Australia shows on the screen.
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-23.684, 133.903), 4));
-
-        // Set listeners for click events.
-        googleMap.setOnPolylineClickListener(this);
-        googleMap.setOnPolygonClickListener(this);
-    }
-
-    private static final PatternItem DOT = new Dot();
-    private static final float PATTERN_GAP_LENGTH_PX = 20;
-
-    private static final PatternItem GAP = new Gap(PATTERN_GAP_LENGTH_PX);
-    //
-// Create a stroke pattern of a gap followed by a dot.
-    private static final List<PatternItem> PATTERN_POLYLINE_DOTTED = Arrays.asList(GAP, DOT);
-
-    @Override
-    public void onPolylineClick(Polyline polyline) {
-        // Flip from solid stroke to dotted stroke pattern.
-        if ((polyline.getPattern() == null) || (!polyline.getPattern().contains(DOT))) {
-            polyline.setPattern(PATTERN_POLYLINE_DOTTED);
-        } else {
-            // The default pattern is a solid stroke.
-            polyline.setPattern(null);
-        }
-
-        Toast.makeText(this, "Route type " + polyline.getTag().toString(),
-                Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onPolygonClick(Polygon polygon) {
-
-    }
-}
-
-
-
-
-*/
-
-  //PRESERVED
-        /*   LatLng events = new LatLng(19.084145, 72.864008);
-        mMap.addMarker(new MarkerOptions().position(events).title("EVENTS!"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(events));
-
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.vip));
-
-            if (!success) {
-                Log.e(TAG, "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e(TAG, "Can't find style. Error: ", e);
-        }
-    }
-*/
 

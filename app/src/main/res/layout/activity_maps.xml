@@ -5,4 +5,23 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="technex.mapup.MapsActivity" />
+    tools:context="technex.mapup.MapsActivity"
+    map:cameraBearing="112.5"
+    map:cameraTargetLat="19.537065"
+    map:cameraTargetLng="75.769825"
+    map:cameraTilt="30"
+    map:cameraZoom="13"
+    map:mapType="satellite"
+    map:uiCompass="false"
+    map:uiRotateGestures="true"
+    map:uiScrollGestures="true"
+    map:uiTiltGestures="true"
+    map:uiZoomControls="false"
+    map:uiZoomGestures="true"
+
+
+
+
+
+
+    />
