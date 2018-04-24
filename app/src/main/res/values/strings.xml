@@ -1,12 +1,6 @@
 <resources>
     <string name="app_name">Mapup</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_navchk">navchk</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="start_text_string">Morphosis is the annual technical festival organized by the Technical Society of NIT Mizoram.It is basically a techno-management festival that is organized every year with a sincere motive to inculcate the technical and managerial skills in the very nature of the participants.We are here with a plethora of indulging and needless to say, super exulting events that not only provide an excellent system of support to the participants but also provide them a distinguished platform to carve out the niche in their field of interest.</string>
 
 
-    <string name="action_settings">Settings</string>
 </resources>
